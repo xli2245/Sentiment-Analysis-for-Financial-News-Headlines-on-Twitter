@@ -1,62 +1,50 @@
----
-annotations_creators:
-- other
-language:
-- en
-language_creators:
-- other
-license:
-- mit
-multilinguality:
-- monolingual
-pretty_name: twitter financial news
-size_categories:
-- 10K<n<100K
-source_datasets:
-- original
-tags:
-- twitter
-- finance
-- markets
-- stocks
-- wallstreet
-- quant
-- hedgefunds
-- markets
-task_categories:
-- text-classification
-task_ids:
-- multi-class-classification
----
+# AIMH at SemEval-2021 Task 6: Multimodal Classification Using an Ensemble of Transformer Models
 
-Read this [BLOG](https://neuralmagic.com/blog/classifying-finance-tweets-in-real-time-with-sparse-transformers/) to see how I fine-tuned a sparse transformer on this dataset.
+This repo contains the code for replicating our system for the SemEval-2021 Task 6 challenge: [Detection of Persuasive Techniques in Texts and Images](https://propaganda.math.unipd.it/semeval2021task6/). Our paper is available [here](https://aclanthology.org/2021.semeval-1.140/).
 
-### Dataset Description
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/25117311/152802885-88b8b26e-8e86-4805-96d6-169163294cfa.png">
+</p>
 
-The Twitter Financial News dataset is an English-language dataset containing an annotated corpus of finance-related tweets. This dataset is used to classify finance-related tweets for their sentiment.
 
-1. The dataset holds 11,932 documents annotated with 3 labels:
-
-```python
-sentiments = {
-    "LABEL_0": "Bearish", 
-    "LABEL_1": "Bullish", 
-    "LABEL_2": "Neutral"
-}  
+## Setup
+Clone this repo:
+```
+git clone https://github.com/mesnico/MemePersuasionDetection
 ```
 
-The data was collected using the Twitter API. The current dataset supports the multi-class classification task.
+Then, install the requisites (virtualenv or conda are recommended):
+```
+pip install -r requirements.txt
+```
 
-### Task: Sentiment Analysis
+Extract the images in the data folder
+```
+cd data
+for z in *.zip; do unzip $z; done
+cd ..
+```
 
-# Data Splits
-There are 2 splits: train and validation. Below are the statistics:
+## Train and Validation
+To train the network issue the following command:
+```
+python train.py --config cfg/config_task3.yaml --logger_name runs/task3 --val_step 100 --num_epochs 50 
+```
+N.B.: `runs/task3` is the folder where the checkpoints and the tensorboard files will be saved. Opening a tensorboard on this directory will show the training and validation curves.
 
-| Dataset Split | Number of Instances in Split                |
-| ------------- | ------------------------------------------- |
-| Train         | 9,938                                       |
-| Validation    | 2,486                                       |
+To perform inference on the best-performing model, issue the following command:
+```
+python inference.py --checkpoint runs/task3/model_best_fold0.pt --validate 
+```
 
+## Citation
 
-# Licensing Information
-The Twitter Financial Dataset (sentiment) version 1.0.0 is released under the MIT License.
+If you found our work useful for your research, please cite our paper:
+
+    @inproceedings{messina2021aimh,
+      title={AIMH at SemEval-2021 Task 6: multimodal classification using an ensemble of transformer models},
+      author={Messina, Nicola and Falchi, Fabrizio and Gennaro, Claudio and Amato, Giuseppe},
+      booktitle={Proceedings of the 15th International Workshop on Semantic Evaluation (SemEval-2021)},
+      pages={1020--1026},
+      year={2021}
+    }
