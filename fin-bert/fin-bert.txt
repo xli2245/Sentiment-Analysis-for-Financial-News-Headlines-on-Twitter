@@ -1,0 +1,1 @@
+fin-bert model can be download from the link: https://huggingface.co/ProsusAI/finbert/tree/main
