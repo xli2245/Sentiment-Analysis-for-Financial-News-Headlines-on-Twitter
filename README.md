@@ -30,11 +30,13 @@ python train.py
 python predict.py
 ```
 ### Pretrained model weight
-The downloaded pretrained models (BERT, RoBERTa ...) can be also be found in the google drive folder. The name is "model.tar.gz".
+For the fin-bert and roberta-base pretrained model, the download links are provided under each folder. The downloaded pretrained models for the others like (BERT, DeBERTa ...) can be also be found in the google drive folder. The name is "model.tar.gz".
 
 To unzip the model weight
 ```
 tar -xvf ./model.tar.gz
+mv ./model/* ./
+rm -rf ./model
 ```
 
 ## Results
