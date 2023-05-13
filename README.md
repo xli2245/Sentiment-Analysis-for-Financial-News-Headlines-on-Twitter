@@ -1,50 +1,41 @@
-# AIMH at SemEval-2021 Task 6: Multimodal Classification Using an Ensemble of Transformer Models
-
-This repo contains the code for replicating our system for the SemEval-2021 Task 6 challenge: [Detection of Persuasive Techniques in Texts and Images](https://propaganda.math.unipd.it/semeval2021task6/). Our paper is available [here](https://aclanthology.org/2021.semeval-1.140/).
-
-<p align="center">
-  <img src="https://user-images.githubusercontent.com/25117311/152802885-88b8b26e-8e86-4805-96d6-169163294cfa.png">
-</p>
-
-
+# CS 839 Group Project: Sentiment Analysis
+### Teammate: Xue Li, Minyi Dai, Qiyuan Chen
+This repo contains the code for the final project of CS 839 in UW-Madison. Sentiment analysis of news headlines plays a vital role in various practical applications, including assessing public opinion, conducting market analysis, and monitoring media coverage. In this research, we employ natural language processing models to perform sentiment analysis on financial news headlines, with a focus on the Twitter financial news dataset. We evaluate model performance using both micro-F1 and macro-F1 scores. To enhance the sentiment analysis pipeline, we implement various model selection strategies, utilize different models, and apply distinct data engineering methods. As a result, the refined pipeline achieves a 7% improvement in performance compared to the baseline pipeline, paving the way for the development of a more precise sentiment analysis tool.
+## Table of Contents
+- [Setup](#setup)
+- [Dataset](#dataset)
+- [Sentiment classification framework](#Sentiment classification framework)
+  - [Environment](#environment)
+  - [Model running](#model-running)
+  - [Pretrained model weight](#model-weight)
+- [Results](#Results)
 ## Setup
 Clone this repo:
 ```
-git clone https://github.com/mesnico/MemePersuasionDetection
+git clone https://github.com/xli2245/CS839-sentiment-classification
+```
+## Dataset
+The original dataset is downloaded from [Twitter Final News dataset](https://huggingface.co/datasets/zeroshot/twitter-financial-news-sentiment). All the used data have been provided under the data folder.
+
+## Sentiment classification framework
+### Environment
+The model training, validation and testing are performed using the [Monai Docker](https://hub.docker.com/r/projectmonai/monai).
+### Model running
+1.  Model training
+```
+python train.py
+```
+2. Model validation / testing
+```
+python predict.py
+```
+### Pretrained model weight
+The downloaded pretrained models (BERT, RoBERTa ...) can be also be found in the google drive folder. The name is "model.tar.gz".
+
+To unzip the model weight
+```
+tar -xvf ./model.tar.gz
 ```
 
-Then, install the requisites (virtualenv or conda are recommended):
-```
-pip install -r requirements.txt
-```
-
-Extract the images in the data folder
-```
-cd data
-for z in *.zip; do unzip $z; done
-cd ..
-```
-
-## Train and Validation
-To train the network issue the following command:
-```
-python train.py --config cfg/config_task3.yaml --logger_name runs/task3 --val_step 100 --num_epochs 50 
-```
-N.B.: `runs/task3` is the folder where the checkpoints and the tensorboard files will be saved. Opening a tensorboard on this directory will show the training and validation curves.
-
-To perform inference on the best-performing model, issue the following command:
-```
-python inference.py --checkpoint runs/task3/model_best_fold0.pt --validate 
-```
-
-## Citation
-
-If you found our work useful for your research, please cite our paper:
-
-    @inproceedings{messina2021aimh,
-      title={AIMH at SemEval-2021 Task 6: multimodal classification using an ensemble of transformer models},
-      author={Messina, Nicola and Falchi, Fabrizio and Gennaro, Claudio and Amato, Giuseppe},
-      booktitle={Proceedings of the 15th International Workshop on Semantic Evaluation (SemEval-2021)},
-      pages={1020--1026},
-      year={2021}
-    }
+## Results
+All the results and training logs could be found under the results folder.
