@@ -4,7 +4,7 @@ This repo contains the code for the final project of CS 839 in UW-Madison. Senti
 ## Table of Contents
 - [Setup](#setup)
 - [Dataset](#dataset)
-- [Sentiment classification framework](#Sentiment classification framework)
+- [Sentiment classification framework](#Sentiment-classification-framework)
   - [Environment](#environment)
   - [Model running](#model-running)
   - [Pretrained model weight](#model-weight)
